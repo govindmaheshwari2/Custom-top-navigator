@@ -25,9 +25,7 @@ class CustomScaffold extends StatefulWidget {
       required this.scaffold,
       required this.children,
       this.onItemTap})
-      : assert(scaffold != null),
-        assert(children != null),
-        assert(scaffold.bottomNavigationBar != null),
+      : assert(scaffold.bottomNavigationBar != null),
         assert(scaffold.bottomNavigationBar is BottomNavigationBar,
             '[CustomScaffold] require an instance of [BottomNavigationBar]'),
         assert(
@@ -44,7 +42,7 @@ class CustomScaffold extends StatefulWidget {
 
 class _CustomScaffoldState extends State<CustomScaffold> {
   int _index = 0;
-  GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
 
   @override
   void initState() {

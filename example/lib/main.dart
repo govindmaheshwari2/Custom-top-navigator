@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:custom_top_navigator/custom_top_navigator.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 //give a navigator key to [MaterialApp] if you want to use the default navigation
 //anywhere in your app eg: line 15 & line 93
 GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,13 +19,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({ Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -32,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Page _page = Page('Page 0');
+  Page _page =  const Page('Page 0');
   int _currentIndex = 0;
 
   // Custom navigator takes a global key if you want to access the
@@ -47,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: (index) {
           // here we used the navigator key to pop the stack to get back to our
           // main page
-          navigatorKey.currentState.maybePop();
+          navigatorKey.currentState?.maybePop();
           setState(() => _page = Page('Page $index'));
           _currentIndex = index;
         },
@@ -63,17 +65,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final _items = [
-    BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('home')),
-    BottomNavigationBarItem(icon: Icon(Icons.event), title: Text('events')),
-    BottomNavigationBarItem(
-        icon: Icon(Icons.save_alt), title: Text('downloads')),
+    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
+    const BottomNavigationBarItem(icon: Icon(Icons.event), label: 'events'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.save_alt), label: 'downloads'),
   ];
 }
 
 class Page extends StatelessWidget {
   final String title;
 
-  const Page(this.title) : assert(title != null);
+  const Page(this.title, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,7 @@ class Page extends StatelessWidget {
 
     return Container(
       child: Center(
-          child: FlatButton(
+          child: TextButton(
               onPressed: () => _openDetailsPage(context), child: text)),
     );
   }
@@ -97,7 +99,7 @@ class Page extends StatelessWidget {
 class DetailsPage extends StatelessWidget {
   final String title;
 
-  const DetailsPage(this.title) : assert(title != null);
+  const DetailsPage(this.title, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

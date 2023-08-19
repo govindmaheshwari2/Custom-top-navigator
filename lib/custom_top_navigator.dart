@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +68,7 @@ class _CustomTopNavigatorState extends State<CustomTopNavigator>
   @override
   void initState() {
     _setNavigator();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
@@ -77,11 +79,11 @@ class _CustomTopNavigatorState extends State<CustomTopNavigator>
       // If window.defaultRouteName isn't '/', we should assume it was set
       // intentionally via `setInitialRoute`, and should override whatever
       // is in [widget.initialRoute].
-      initialRoute: WidgetsBinding.instance!.window.defaultRouteName !=
+      initialRoute: WidgetsBinding.instance.window.defaultRouteName !=
               Navigator.defaultRouteName
-          ? WidgetsBinding.instance!.window.defaultRouteName
+          ? WidgetsBinding.instance.window.defaultRouteName
           : widget.initialRoute ??
-              WidgetsBinding.instance!.window.defaultRouteName,
+              WidgetsBinding.instance.window.defaultRouteName,
       onGenerateRoute: _onGenerateRoute,
       onUnknownRoute: _onUnknownRoute,
       observers: widget.navigatorObservers,
@@ -143,12 +145,11 @@ class _CustomTopNavigatorState extends State<CustomTopNavigator>
         settings,
         pageContentBuilder,
       );
-      assert(route != null,
-          'The pageRouteBuilder for CustomNavigator must return a valid non-null Route.');
       return route;
     }
-    if (widget.onGenerateRoute != null)
+    if (widget.onGenerateRoute != null) {
       return widget.onGenerateRoute!(settings);
+    }
     return null;
   }
 
@@ -186,17 +187,19 @@ class _CustomTopNavigatorState extends State<CustomTopNavigator>
     // TODO: implement didPushRouteInformation
     throw UnimplementedError();
   }
+
+  @override
+  Future<AppExitResponse> didRequestAppExit() {
+    // TODO: implement didRequestAppExit
+    throw UnimplementedError();
+  }
 }
 
 class PageRoutes {
   static final materialPageRoute =
       (<T>(RouteSettings settings, WidgetBuilder builder) =>
-              MaterialPageRoute<T>(settings: settings, builder: builder))
-          as MaterialPageRoute<T> Function<T>(
-              RouteSettings, Widget Function(BuildContext));
+              MaterialPageRoute<T>(settings: settings, builder: builder));
   static final cupertinoPageRoute =
       (<T>(RouteSettings settings, WidgetBuilder builder) =>
-              CupertinoPageRoute<T>(settings: settings, builder: builder))
-          as CupertinoPageRoute<T> Function<T>(
-              RouteSettings, Widget Function(BuildContext));
+              CupertinoPageRoute<T>(settings: settings, builder: builder));
 }

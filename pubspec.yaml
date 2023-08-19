@@ -1,6 +1,6 @@
 name: custom_top_navigator
 description: A flutter package that makes it easy to create your own navigator anywhere in the widget tree.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/govindmaheshwari2/Custom-top-navigator
 
 
