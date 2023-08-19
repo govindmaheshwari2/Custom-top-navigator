@@ -30,10 +30,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   Page _page =  const Page('Page 0');
   int _currentIndex = 0;
 
@@ -81,11 +81,9 @@ class Page extends StatelessWidget {
   Widget build(BuildContext context) {
     final text = Text(title);
 
-    return Container(
-      child: Center(
-          child: TextButton(
-              onPressed: () => _openDetailsPage(context), child: text)),
-    );
+    return Center(
+        child: TextButton(
+            onPressed: () => _openDetailsPage(context), child: text));
   }
 
   //Use the navigator like you usually do with .of(context) method
@@ -104,8 +102,6 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final text = Text('Details of $title');
-    return Container(
-      child: Center(child: text),
-    );
+    return Center(child: text);
   }
 }
